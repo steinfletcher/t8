@@ -1,17 +1,25 @@
 package git
 
 import (
-	"os"
-	"os/exec"
+	"fmt"
+	"github.com/steinfletcher/t8/domain"
+	"github.com/steinfletcher/t8/shell"
+	"strings"
 )
 
-func Clone(url, target string) error {
-	var err error
-	cmd := exec.Command("git", "clone", "--depth", "1", url, target)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	if err = cmd.Run(); err != nil {
-		return err
+// NewFetchConfig is an implementation of FetchTemplate that fetches the template using git
+func NewFetchConfig(executor shell.Executor) domain.FetchTemplate {
+	return func(url, targetDir string) error {
+		if isOrgAndRepo(url) {
+			parts := strings.Split(url, "/")
+			url = fmt.Sprintf("git@github.com:%s/%s", parts[0], parts[1])
+		}
+		return executor.Exec("git", "clone", "--quiet", "--depth", "1", url, targetDir)
 	}
-	return nil
+}
+
+func isOrgAndRepo(url string) bool {
+	return !strings.HasPrefix(url, "git@") &&
+		!strings.HasPrefix(url, "http") &&
+		len(strings.Split(url, "/")) == 2
 }

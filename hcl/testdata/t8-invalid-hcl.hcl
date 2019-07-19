@@ -1,4 +1,4 @@
-parameter "project_name" {
+parameter "ProjectName" {
   type = string
   description = "the project name"
   default = "acme"

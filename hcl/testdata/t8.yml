@@ -1,0 +1,12 @@
+name: My Amazing App
+parameter:
+  - ProjectName:
+      - description: the project name
+        type: string
+        default: acme
+  - Authors:
+      - description: the project authors
+        type: option
+        default:
+          - yuki@foo.com
+          - mei@bar.com

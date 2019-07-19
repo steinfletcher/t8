@@ -1,0 +1,12 @@
+name: my project
+parameter:
+- project_name:
+  - description: the project name
+    type: string
+    default: acme
+- authors:
+  - description: the project authors
+    type: list
+    default:
+    - yuki@foo.com
+    - mei@bar.com

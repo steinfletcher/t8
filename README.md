@@ -32,7 +32,7 @@ Or download a prebuilt binary from github releases.
 
 ## Usage
 
-### Interactive CLI
+## Interactive CLI
 
 ```bash
 $ t8 new https://github.com/myOrg/myTemplate my-amazing-app
@@ -52,3 +52,25 @@ $ t8 -ProjectName=acme -GoVersion=1.12 https://github.com/org/go-echo-template.t
 
 Template created: /home/stein/code/my-amazing-app
 ```
+
+## Configuration
+
+Create a Go template and host it on github. Create a file called `t8.hcl` or `t8.yml` in the root of the project. This is the configuration file where you can configure your generator.
+
+### Parameters
+
+A `parameter` is a variable defined at runtime that is made accessible to your Go template. You can also define defaults
+
+```hcl
+parameter "ProjectName" {
+  type = "string"
+  description = "the project name"
+  default = "acme"
+}
+```
+
+In this example the user will be prompted to enter the project name or provide it as a command line flag. If the user does not define this variable the default value is used.
+
+### Exclude Paths
+
+TODO

@@ -5,6 +5,7 @@ import (
 	"github.com/steinfletcher/t8/git"
 	"github.com/steinfletcher/t8/shell"
 	"github.com/steinfletcher/t8/template"
+	"log"
 	"os"
 )
 
@@ -14,5 +15,7 @@ func main() {
 	prompt := shell.NewStdInReader()
 	templateRenderer := template.NewTemplateRenderer()
 
-	cmd.Run(fetchConfig, prompt, templateRenderer, os.Args)
+	if err := cmd.Run(fetchConfig, prompt, templateRenderer, os.Args); err != nil {
+		log.Fatal(err)
+	}
 }

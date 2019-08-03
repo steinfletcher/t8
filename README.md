@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/steinfletcher/t8.svg?token=iwqcySR3NwvVKvZeyk52&branch=master)](https://travis-ci.com/steinfletcher/t8)
+[![Go Report Card](https://goreportcard.com/badge/github.com/steinfletcher/t8)](https://goreportcard.com/report/github.com/steinfletcher/t8)
 
 *This is experimental and the API is likely to change*
 

@@ -59,7 +59,7 @@ Create a Go template and host it on github. Create a file called `t8.hcl` or `t8
 
 ### Parameters
 
-A `parameter` is a variable defined at runtime that is made accessible to your Go template. You can also define defaults
+A `parameter` is a variable set at runtime and is made accessible to your Go template. You can also define defaults
 
 ```hcl
 parameter "ProjectName" {
@@ -73,4 +73,27 @@ In this example the user will be prompted to enter the project name or provide i
 
 ### Exclude Paths
 
-TODO
+You can exclude the generation of files and directories using the `excludePath` variable. 
+
+```hcl
+excludePath "Scripts" {
+  paths = [
+    "test.sh",
+  ]
+}
+```
+
+This configures an unconditional exclusion on a path pattern - the `test.sh` file will not be excluded from the final generated content. You can also exclude paths based on the value of a parameter.
+
+```hcl
+excludePath "Postgres" {
+  paths = [
+    "^/postgres/.*$"
+  ]
+  parameterName = "SqlDialect"
+  operator = "notEqual"
+  parameterValue = "postgresql"
+}
+```
+
+In this example, the `/postgres` directory will not be generated if the `SqlDialect` parameter is not equal to `postgresql`. The available operators are `equal` and `notEqual`

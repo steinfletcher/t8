@@ -83,7 +83,7 @@ excludePath "Scripts" {
 }
 ```
 
-This configures an unconditional exclusion on a path pattern - the `test.sh` file will not be excluded from the final generated content. You can also exclude paths based on the value of a parameter.
+This configures an unconditional exclusion on a path pattern - the `test.sh` file will be excluded from the final generated content. You can also exclude paths based on the value of a parameter.
 
 ```hcl
 excludePath "Postgres" {

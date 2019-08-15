@@ -5,7 +5,7 @@
 
 # t8
 
-`t8` (pronounced template) is a simple CLI application that renders templates defined on Github (and other locations).
+`t8` is a simple CLI application that renders templates defined on Github (and other locations).
 
 Inspired by [giter8](http://www.foundweekends.org/giter8/).
 
@@ -22,6 +22,7 @@ Or download a prebuilt binary from github releases.
 ## Use cases
 
 * A scaffolding tool for generating boilerplate applications (like Yeoman or sbt minus the build step)
+* Generator for microservice applications for consistency and speed 
 * Automate generation of config files
 
 ## Features
@@ -71,6 +72,23 @@ parameter "ProjectName" {
 ```
 
 In this example the user will be prompted to enter the project name or provide it as a command line flag. If the user does not define this variable the default value is used.
+
+### Parameter Types
+
+`string` - the default type.
+
+`option` - presents an option list to the user. Example
+
+```hcl
+parameter "SqlDialect" {
+  type = "option"
+  description = "the SQL dialect"
+  default = [
+    "postgresql",
+    "mysql",
+  ]
+}
+``` 
 
 ### Exclude Paths
 

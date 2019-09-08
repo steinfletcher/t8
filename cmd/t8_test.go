@@ -28,7 +28,7 @@ func TestT8(t *testing.T) {
 	}
 	args := []string{}
 
-	err := cmd.Run(fetchTemplate, promptReader, templateRenderer, args)
+	err := cmd.Run(fetchTemplate, promptReader, templateRenderer, args, "0.1.1")
 
 	assert.NoError(t, err)
 }

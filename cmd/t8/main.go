@@ -9,13 +9,15 @@ import (
 	"os"
 )
 
+var version string
+
 func main() {
 	exec := shell.NewExecutor()
 	fetchConfig := git.NewFetchConfig(exec)
 	prompt := shell.NewStdInReader()
 	templateRenderer := template.NewTemplateRenderer()
 
-	if err := cmd.Run(fetchConfig, prompt, templateRenderer, os.Args); err != nil {
+	if err := cmd.Run(fetchConfig, prompt, templateRenderer, os.Args, version); err != nil {
 		log.Fatal(err)
 	}
 }

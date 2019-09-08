@@ -16,6 +16,7 @@ func Run(
 	prompt domain.PromptReader,
 	template domain.TemplateRenderer,
 	args []string,
+	version string,
 ) error {
 	command, err := shell.ParseArgs(args)
 	if err != nil {
@@ -27,18 +28,17 @@ func Run(
 	}
 
 	if command.Name == "help" {
-		printHelp()
+		printHelp(version)
 		return nil
 	}
 
 	if command.Name == "version" {
-		fmt.Println("show version...")
+		fmt.Println(version)
 		return nil
 	}
 
 	if command.Name == "new" {
-		runNewCommand(command, prompt, fetchConfig, template)
-		return nil
+		return runNewCommand(command, prompt, fetchConfig, template)
 	}
 
 	return errors.New("expected to receive a command")
@@ -61,7 +61,10 @@ func runNewCommand(command domain.Command, prompt domain.PromptReader, fetchConf
 		return err
 	}
 
-	printFileToConsole("before.t8", targetDir)
+	err = printFileToConsole("before.t8", targetDir)
+	if err != nil {
+		return err
+	}
 
 	data, err := ioutil.ReadFile(fmt.Sprintf("%s/t8.yml", targetDir))
 	if err != nil {
@@ -106,18 +109,18 @@ func printFileToConsole(f, targetDir string) error {
 	return nil
 }
 
-func printHelp() {
-	fmt.Println(`NAME:
+func printHelp(version string) {
+	fmt.Printf(`NAME:
    t8 - a customizable template generator
 
 USAGE:
    t8 new myorg/myrepo.t8 localDir -ProjectName=my-project -GoVersion=1.12
 
 VERSION:
-   0.1.1
+   %s
 
 COMMANDS:
      new         Render a new template
      help,    -h Shows help
-     version, -v Shows version`)
+     version, -v Shows version\n`, version)
 }

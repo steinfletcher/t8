@@ -31,6 +31,7 @@ Or download a prebuilt binary from github releases.
 * Define config as HCL or YAML
 * Interactive CLI to prompt for parameters
 * Pass input parameters as arguments (useful in CI)
+* Use [sprig](http://masterminds.github.io/sprig/) functions in templates 
 
 ## Usage
 
@@ -58,6 +59,14 @@ Template created: /home/stein/code/my-amazing-app
 ## Configuration
 
 Create a Go template and host it on github. Create a file called `t8.hcl` or `t8.yml` in the root of the project. This is the configuration file where you can configure your generator.
+
+### Templates
+
+`t8` uses Go's standard templating support. It adds some useful template functions via [sprig](http://masterminds.github.io/sprig/), which allows you to manipulate the parameters
+
+```gotemplate
+Hello {{ .Parameter.Name | lower | snakecase }}
+```
 
 ### Parameters
 

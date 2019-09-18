@@ -2,6 +2,7 @@ package template
 
 import (
 	"bytes"
+	"github.com/Masterminds/sprig"
 	"github.com/pkg/errors"
 	"github.com/steinfletcher/t8/domain"
 	"io/ioutil"
@@ -79,7 +80,7 @@ func createTemplateModel(config domain.Config) map[string]interface{} {
 }
 
 func render(tpl string, model interface{}) ([]byte, error) {
-	t, err := template.New("template").Parse(string(tpl))
+	t, err := template.New("template").Funcs(sprig.TxtFuncMap()).Parse(tpl)
 	if err != nil {
 		return nil, errors.Wrap(err, "error parsing template")
 	}

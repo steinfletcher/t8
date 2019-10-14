@@ -5,7 +5,7 @@ go 1.12
 require (
 	github.com/Masterminds/goutils v1.1.0 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
-	github.com/Masterminds/sprig v2.21.0+incompatible
+	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/golang/mock v1.3.1
 	github.com/google/uuid v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0
